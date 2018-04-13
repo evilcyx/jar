@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Mvp-master</string>
+
+    <string name="del_name">删除</string>
+    <string name="useravatar_camera">拍照</string>
+    <string name="useravatar_picture">本机照片</string>
+    <string name="cancel">取消</string>
+    <string name="ok">确定</string>
+</resources>

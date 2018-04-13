@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.admin.mvp_master.MainActivity"
+    android:background="@drawable/bg"
+    >
+
+
+    <include layout="@layout/toolbar"
+        ></include>
+
+
+    <Button
+        android:id="@+id/btn_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳转Login"
+        />
+
+    <Button
+        android:id="@+id/btn_cra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="200dp"
+        android:text="调用相机"
+        />
+
+
+        <LinearLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/linearLayout">
+
+            <com.stx.xhb.xbanner.XBanner
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="200.0dip"
+                app:AutoPlayTime="3000"
+                app:pointsContainerBackground="#44AAAAAA"
+                app:pointsPosition="RIGHT"
+                app:tipTextColor="#FFFFFFFF"
+                app:tipTextSize="16.0sp" >
+
+            </com.stx.xhb.xbanner.XBanner>
+
+        </LinearLayout>
+
+    <ImageView
+        android:id="@+id/useravatar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/ic_launcher" />
+
+    <Button
+        android:id="@+id/clear_cache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="清空缓存"
+        android:layout_below="@id/useravatar"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/clear_cache"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="适配虚拟键盘"
+            android:layout_gravity="bottom"
+            android:gravity="center_horizontal"
+            />
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>

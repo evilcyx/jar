@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_cc"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/useravatar_selector"
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:layout_gravity="center_vertical"
+
+        >
+
+        <TextView
+            android:id="@+id/dioalog_context"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="请输入你的dioalog内容"
+            android:gravity="center_horizontal"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dioalog_context"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            >
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cancel"
+                android:textColor="@color/red"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ok"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <!--<Button-->
+            <!--android:id="@+id/dioalog_cancel"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/cancel"-->
+            <!--android:layout_below="@id/dioalog_context"-->
+            <!--android:background="@drawable/dioalog_cancel"-->
+            <!--/>-->
+
+        <!--<Button-->
+            <!--android:id="@+id/dioalog_ok"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_below="@+id/dioalog_context"-->
+            <!--android:text="@string/ok"-->
+            <!--android:background="@drawable/dioalog_ok"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--/>-->
+
+    </RelativeLayout>
+
+
+</FrameLayout>
