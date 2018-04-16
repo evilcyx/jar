@@ -40,6 +40,9 @@
 
         <!--Glide配置文件-->
         <meta-data android:name="com.example.admin.mvp_master.tools.glideUtil.GlideConfiguration" android:value="GlideModule" />
+
+        <!--播放背景音乐-->
+        <service android:name=".other.service.AudioService"  android:exported="true" android:process=":remote" />
     </application>
 
 

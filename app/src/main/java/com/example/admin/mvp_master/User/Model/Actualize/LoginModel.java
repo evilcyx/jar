@@ -35,7 +35,6 @@ public class LoginModel implements ILoginModel {
         this.loginPresenter = loginPresenter;
     }
 
-    List<UserBean> userBeanList=new ArrayList<>();
     @Override
     public void Login(String userNane, String userPwd) {
 

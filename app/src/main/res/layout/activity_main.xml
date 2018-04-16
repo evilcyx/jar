@@ -69,17 +69,26 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/clear_cache"
         >
 
-        <TextView
-            android:layout_width="match_parent"
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="适配虚拟键盘"
-            android:layout_gravity="bottom"
-            android:gravity="center_horizontal"
+            android:id="@+id/start_audio"
+            android:text="播放音乐"
             />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/end_audio"
+            android:text="停止播放音乐"
+            />
+
+
     </LinearLayout>
 
 

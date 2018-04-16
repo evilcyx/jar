@@ -1,14 +1,23 @@
 package com.example.admin.mvp_master;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.IBinder;
 import android.provider.MediaStore;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.text.SpannableString;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -25,20 +34,39 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.admin.mvp_master.User.View.Atcualize.LoginActivity;
 import com.example.admin.mvp_master.base.BasePermissionActivity;
+import com.example.admin.mvp_master.bean.BookBean;
+import com.example.admin.mvp_master.bean.UserBean;
+import com.example.admin.mvp_master.other.AppManager;
+import com.example.admin.mvp_master.other.service.AudioService;
 import com.example.admin.mvp_master.tools.BadgeUtils;
 import com.example.admin.mvp_master.tools.glideUtil.GlideCircleTransform;
 import com.example.admin.mvp_master.tools.glideUtil.ImageCatchUtil;
+import com.example.admin.mvp_master.tools.network.ApiService;
 import com.example.admin.mvp_master.tools.network.NetWorkReceiver;
 import com.stx.xhb.xbanner.XBanner;
 import com.stx.xhb.xbanner.transformers.Transformer;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static com.example.admin.mvp_master.tools.RequestTag.PERMISSION_CAMERA_TAG;
 import static com.example.admin.mvp_master.tools.RequestTag.PERMISSION_PICTRUE_TAG;
 import static com.example.admin.mvp_master.tools.RequestTag.USER_AVATAR_CAMERA_TAG;
 import static com.example.admin.mvp_master.tools.RequestTag.USER_AVATAR_PICTRUE_TAG;
+import static com.example.admin.mvp_master.tools.network.ApiService.BASEDoubanUrl;
+import static com.example.admin.mvp_master.tools.network.ApiService.BASE_URL;
+import static com.example.admin.mvp_master.tools.network.ApiService.XiaotingUrl;
 
 public class MainActivity extends BasePermissionActivity implements View.OnClickListener {
 
@@ -59,13 +87,14 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
     ImageCatchUtil catchUtil=new ImageCatchUtil();
 
 
-    SpannableString spannableString;
+    SpannableString spannableString;//富文本
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initState();
         setContentView(R.layout.activity_main);
+        AppManager.getAppManager().addActivity(this);
         useravatar= (ImageView) findViewById(R.id.useravatar);
         btn_main= (TextView) findViewById(R.id.btn_main);
         btn_main.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +116,21 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
                 catchUtil.clearImageDiskCache();
             }
         });
+        findViewById(R.id.start_audio).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,AudioService.class);
+                startService(intent);
+            }
+        });
+        findViewById(R.id.end_audio).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this,AudioService.class);
+                stopService(intent);
+            }
+        });
+
         xBanner = (XBanner) findViewById(R.id.banner);
 
         // 初始化XBanner中展示的数据
@@ -132,7 +176,8 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
 
         String chace=catchUtil.getCacheSize();
         btn_main.setText(chace+"");
-
+        showNotification(this,1,"title","来了的一条消息");
+        Douban();
     }
 
     private View UserAvatarView;
@@ -141,6 +186,7 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
     private TextView cancel;
     private View alphaView;
 
+    //todo 头像
     public void ShowUserAvatarPop(View view){
         if(popupWindow==null){
             DisplayMetrics metric = new DisplayMetrics();
@@ -176,17 +222,81 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
                 }
             }
         });
+
+
+
     }
 
 
+    //调用的豆瓣的接口
+    public void Douban(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(XiaotingUrl)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        //获取接口实例
+        ApiService movieService = retrofit.create(ApiService.class);
+//        //调用方法得到一个Call
+        Subscription subscription = movieService.getList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<RequestBody>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.e("test","完成");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("test","失败");
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(RequestBody responseBody) {
+                        Log.e("test",responseBody.toString());
+                    }
+                });
+    }
 
 
+    private void showNotification(Context context, int id, String title, String text) {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setContentTitle(title);
+        builder.setContentText(text);
+        builder.setAutoCancel(true);
+        builder.setOnlyAlertOnce(true);
+        // 需要VIBRATE权限
+        builder.setDefaults(Notification.DEFAULT_VIBRATE);
+        builder.setPriority(Notification.PRIORITY_DEFAULT);
+        builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources()
+                ,R.mipmap.ic_launcher));//适配有的手机没有小图标
+        // Creates an explicit intent for an Activity in your app
+        //自定义打开的界面
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            builder.setStyle(new NotificationCompat.BigTextStyle().bigText(text).setBigContentTitle(title));//内容显示多行的处理
+        }
+        NotificationManager notificationManager = (NotificationManager) context
+                .getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(id, builder.build());
+        //点击时的操作
+        Intent resultIntent = new Intent(context, MainActivity.class);
+        resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
+                resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(contentIntent);
+    }
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(networkChangeReceiver);
+        Intent intent = new Intent(MainActivity.this,AudioService.class);
+        stopService(intent);
     }
 
     /**
@@ -253,6 +363,21 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
                 if(popupWindow.isShowing()){
                     popupWindow.dismiss();
                 }
+//                Intent intent = new Intent();
+//                intent.setClass(this, AudioService.class);
+//                if(id == R.id.btn_start){
+//                    //启动Service，然后绑定该Service，这样我们可以在同时销毁该Activity，看看歌曲是否还在播放
+//                    startService(intent);
+//                    bindService(intent, conn, Context.BIND_AUTO_CREATE);
+//                    finish();
+//                }else if(id == R.id.btn_end){
+//                    //结束Service
+//                    unbindService(conn);
+//                    stopService(intent);
+//                    finish();
+//                }else if(id == R.id.btn_fun){
+//                    audioService.haveFun();
+//                }
         }
     }
     private Bitmap bitmap ;//存放裁剪后的头像
