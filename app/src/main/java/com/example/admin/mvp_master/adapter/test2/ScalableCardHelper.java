@@ -203,7 +203,7 @@ public class ScalableCardHelper {
             int itemCount = layoutManager.getItemCount();
             int peekWidth = getPeekWidth(parent, view);
             if(position != 0 && position != itemCount - 1){
-                outRect.set(200, 0, 0, 0);
+                outRect.set(0, 0, 0, 0);
                 return;
             }
 
