@@ -32,6 +32,7 @@ public class LoginModel implements ILoginModel {
     private ILoginPresenter loginPresenter;
 
     public LoginModel(ILoginPresenter loginPresenter) {
+
         this.loginPresenter = loginPresenter;
     }
 

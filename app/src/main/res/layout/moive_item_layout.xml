@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+
+    <ImageView
+        android:id="@+id/moive_image"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:src="@drawable/bg"
+        />
+
+
+        <TextView
+            android:id="@+id/moive_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="电影标题"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        >
+        <RatingBar
+            android:id="@+id/moive_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rating="3"
+            android:stepSize="0.5"
+            android:clickable="true"
+            android:isIndicator="true"
+            android:numStars="5"
+            style="?android:attr/ratingBarStyleSmall"
+            android:progressTint="@color/red"
+            />
+
+        <TextView
+            android:id="@+id/moive_score"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="评分"
+            android:gravity="center_vertical"
+            />
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>

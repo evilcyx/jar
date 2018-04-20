@@ -16,6 +16,7 @@ import com.example.admin.mvp_master.adapter.LoginRecyAdapter;
 import com.example.admin.mvp_master.base.BasePermissionActivity;
 import com.example.admin.mvp_master.base.BasePermissionSwipeActivity;
 import com.example.admin.mvp_master.bean.UserBean;
+import com.example.admin.mvp_master.other.AppManager;
 import com.example.admin.mvp_master.other.RecyItemDecoration;
 import com.example.admin.mvp_master.tools.DioalogUtil.LoadDioalog;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -47,6 +48,7 @@ public class LoginActivity extends BasePermissionSwipeActivity implements ILogin
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wave_login_item_activity);
+        AppManager.getAppManager().addActivity(this);
         loginPresenter=new LoginPresenter(this);
        loginPresenter.LoginToService("","");//发请求
         userBeanList=new ArrayList<>();
@@ -113,5 +115,10 @@ public class LoginActivity extends BasePermissionSwipeActivity implements ILogin
         this.userBeanList.addAll(beanList);
         mAdapter.notifyDataSetChanged();
         Log.e("mvp",userBeanList.get(0).getMeans());
+    }
+
+    @Override
+    public void OnSucceedList(Object bean) {
+
     }
 }

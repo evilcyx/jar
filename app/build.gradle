@@ -5,8 +5,8 @@ android {
     buildToolsVersion "26.0.1"
     defaultConfig {
         applicationId "com.example.admin.mvp_master"
-        minSdkVersion 15
-        targetSdkVersion 27
+        minSdkVersion 16
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -40,23 +40,24 @@ dependencies {
     //配合Rxjava 使用
     compile('com.github.hotchemi:permissionsdispatcher:3.1.0') { exclude module: 'support-v13' }
     annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.1.0'
-//    compile 'com.android.support:support-v4:23.3.0'
+    //    compile 'com.android.support:support-v4:23.3.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
-
     //下拉刷新jar
     //1.1.0 API改动过大，老用户升级需谨慎
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-3'
-    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-3'//没有使用特殊Header，可以不加这行
-    compile 'com.android.support:appcompat-v7:25.3.1'//版本 23以上（必须）
-//    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-1'
-//    compile 'com.github.recruit-lifestyle:WaveSwipeRefreshLayout:1.6'
-
+    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-3'
+    //没有使用特殊Header，可以不加这行
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    //版本 23以上（必须）
+    //    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-1'
+    //    compile 'com.github.recruit-lifestyle:WaveSwipeRefreshLayout:1.6'
+    //benner框架
     compile 'com.xhb:xbanner:1.2.2'
     compile 'com.nineoldandroids:library:2.4.0'
-
-    compile('com.github.hotchemi:permissionsdispatcher:3.1.0')
-    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.1.0'
-    compile('com.github.hotchemi:permissionsdispatcher:3.1.0')
-    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.1.0'
+    //
+    //    compile('com.github.hotchemi:permissionsdispatcher:3.1.0')
+    //    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:3.1.0'
+    compile 'com.makeramen:roundedimageview:2.3.0'
+    compile project(':library')
 }

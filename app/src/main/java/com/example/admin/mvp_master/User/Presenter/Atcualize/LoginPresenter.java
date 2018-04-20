@@ -47,5 +47,10 @@ public class LoginPresenter implements ILoginPresenter {
 //        loginView.showLoading();
     }
 
+    @Override
+    public void OnSucceedList(Object bean) {
+
+    }
+
 
 }

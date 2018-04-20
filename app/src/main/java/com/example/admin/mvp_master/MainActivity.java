@@ -32,9 +32,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.admin.mvp_master.User.View.Atcualize.DoubanLoginActivity;
 import com.example.admin.mvp_master.User.View.Atcualize.LoginActivity;
 import com.example.admin.mvp_master.base.BasePermissionActivity;
 import com.example.admin.mvp_master.bean.BookBean;
+import com.example.admin.mvp_master.bean.MoiveBean;
+import com.example.admin.mvp_master.bean.MoiveBeanList;
+import com.example.admin.mvp_master.bean.TestBean;
 import com.example.admin.mvp_master.bean.UserBean;
 import com.example.admin.mvp_master.other.AppManager;
 import com.example.admin.mvp_master.other.service.AudioService;
@@ -60,6 +64,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static com.example.admin.mvp_master.tools.RequestTag.DOUBAN_LOGIN_TAG;
 import static com.example.admin.mvp_master.tools.RequestTag.PERMISSION_CAMERA_TAG;
 import static com.example.admin.mvp_master.tools.RequestTag.PERMISSION_PICTRUE_TAG;
 import static com.example.admin.mvp_master.tools.RequestTag.USER_AVATAR_CAMERA_TAG;
@@ -88,6 +93,8 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
 
 
     SpannableString spannableString;//富文本
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +135,13 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,AudioService.class);
                 stopService(intent);
+            }
+        });
+        findViewById(R.id.douban_login).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this, DoubanLoginActivity.class);
+                startActivityForResult(intent,DOUBAN_LOGIN_TAG);
             }
         });
 
@@ -177,7 +191,8 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
         String chace=catchUtil.getCacheSize();
         btn_main.setText(chace+"");
         showNotification(this,1,"title","来了的一条消息");
-        Douban();
+        Douban();//豆瓣的接口
+
     }
 
     private View UserAvatarView;
@@ -237,25 +252,29 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
                 .build();
         //获取接口实例
         ApiService movieService = retrofit.create(ApiService.class);
+
 //        //调用方法得到一个Call
         Subscription subscription = movieService.getList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<RequestBody>() {
+                .subscribe(new Subscriber<TestBean>() {
                     @Override
-                    public void onCompleted() {
+                    public void onCompleted()
+                    {
                         Log.e("test","完成");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("test","失败");
+                        Log.e("test","aaaaaaaaaaaaaaaaaaaaaaaaaa失败");
                         e.printStackTrace();
                     }
 
                     @Override
-                    public void onNext(RequestBody responseBody) {
-                        Log.e("test",responseBody.toString());
+                    public void onNext(TestBean responseBody) {
+                        Log.e("test","aaaaaaaaaaaaaaaaaaaaaaaaaa成功");
+                        List<TestBean.DataBean> dataBeanList=responseBody.getData();
+                        Log.e("test", responseBody.toString());
                     }
                 });
     }

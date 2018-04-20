@@ -1,1 +1,1 @@
-include ':app', ':refresh-header', ':refresh-footer', ':refresh-layout'
+include ':app', ':refresh-header', ':refresh-footer', ':refresh-layout', ':library'

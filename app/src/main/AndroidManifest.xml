@@ -38,7 +38,17 @@
             android:configChanges="keyboardHidden|orientation"
             ></activity>
 
-        <!--Glide配置文件-->
+        <!--豆瓣登录-->
+        <activity android:name=".User.View.Atcualize.DoubanLoginActivity" android:configChanges="keyboard|orientation"></activity>
+
+
+        <!--豆瓣电影列表-->
+        <activity android:name=".Moive.View.Atcualize.MoiveListViewActivity" android:configChanges="keyboard|orientation"></activity>
+
+        <!--豆瓣电影的详情-->
+        <activity android:name=".Moive.View.Atcualize.MoiveViewActivity" android:configChanges="keyboard|orientation"></activity>
+
+       <!--Glide配置文件-->
         <meta-data android:name="com.example.admin.mvp_master.tools.glideUtil.GlideConfiguration" android:value="GlideModule" />
 
         <!--播放背景音乐-->

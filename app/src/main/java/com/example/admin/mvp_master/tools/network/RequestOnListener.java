@@ -18,5 +18,7 @@ public interface RequestOnListener<T>{
 
     void OnSucceedList(List<T> beanList);//泛型集合
 
+    void OnSucceedList(T bean);//泛型对象
+
 
 }

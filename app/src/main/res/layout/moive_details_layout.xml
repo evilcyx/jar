@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    >
+
+    <TextView
+        android:id="@+id/moive_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="电影标题"
+        android:gravity="center_horizontal"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        />
+
+    <LinearLayout
+        android:id="@+id/moive_base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/moive_title"
+        >
+
+        <ImageView
+            android:id="@+id/moive_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/bg"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/moive_director"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="导演：张艺谋"
+                android:maxLines="1"
+                android:ellipsize="end"
+                />
+
+
+            <TextView
+                android:id="@+id/moive_protagonist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="主演：张艺谋"
+                android:maxLines="1"
+                android:ellipsize="end"
+                />
+
+            <TextView
+                android:id="@+id/moive_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="类型：张艺谋"
+                android:maxLines="1"
+                android:ellipsize="end"
+                />
+
+            <TextView
+                android:id="@+id/moive_year"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="上映日期：张艺谋"
+                android:maxLines="1"
+                android:ellipsize="end"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/moive_context"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/moive_base"
+        >
+        <TextView
+            android:id="@+id/moive_synopsis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="电影简介：test"
+            android:maxLines="1"
+            android:ellipsize="end"
+            />
+
+        <TextView
+            android:id="@+id/moive_introduce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="剧情介绍"
+            />
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>
