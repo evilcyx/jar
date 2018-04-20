@@ -41,6 +41,11 @@
         <!--豆瓣登录-->
         <activity android:name=".User.View.Atcualize.DoubanLoginActivity" android:configChanges="keyboard|orientation"></activity>
 
+        <!--测试画廊1-->
+        <activity android:name=".User.View.Atcualize.TestActivity" android:configChanges="keyboard|orientation"></activity>
+
+        <!--测试画廊2-->
+        <activity android:name=".User.View.Atcualize.Test2activity" android:configChanges="keyboard|orientation"></activity>
 
         <!--豆瓣电影列表-->
         <activity android:name=".Moive.View.Atcualize.MoiveListViewActivity" android:configChanges="keyboard|orientation"></activity>

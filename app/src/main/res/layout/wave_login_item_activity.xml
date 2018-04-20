@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"></com.scwang.smartrefresh.layout.header.ClassicsHeader>
 
 
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recy_listview"
             android:layout_width="match_parent"

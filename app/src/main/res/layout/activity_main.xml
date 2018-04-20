@@ -99,6 +99,23 @@
         android:layout_below="@id/audio_layout"
         />
 
+    <Button
+        android:id="@+id/darwLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/audio_layout"
+        android:layout_toEndOf="@id/btn_main"
+        android:layout_toRightOf="@id/btn_main"
+        android:text="画廊效果1" />
+
+    <Button
+        android:id="@+id/darwLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/darwLayout"
+        android:layout_toEndOf="@id/btn_main"
+        android:layout_toRightOf="@id/btn_main"
+        android:text="画廊效果2" />
 
 
 </RelativeLayout>

@@ -4,17 +4,14 @@ import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
-import android.os.IBinder;
 import android.provider.MediaStore;
 import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
@@ -34,12 +31,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.admin.mvp_master.User.View.Atcualize.DoubanLoginActivity;
 import com.example.admin.mvp_master.User.View.Atcualize.LoginActivity;
+import com.example.admin.mvp_master.User.View.Atcualize.Test2activity;
+import com.example.admin.mvp_master.User.View.Atcualize.TestActivity;
 import com.example.admin.mvp_master.base.BasePermissionActivity;
-import com.example.admin.mvp_master.bean.BookBean;
-import com.example.admin.mvp_master.bean.MoiveBean;
-import com.example.admin.mvp_master.bean.MoiveBeanList;
 import com.example.admin.mvp_master.bean.TestBean;
-import com.example.admin.mvp_master.bean.UserBean;
 import com.example.admin.mvp_master.other.AppManager;
 import com.example.admin.mvp_master.other.service.AudioService;
 import com.example.admin.mvp_master.tools.BadgeUtils;
@@ -54,8 +49,6 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -69,8 +62,6 @@ import static com.example.admin.mvp_master.tools.RequestTag.PERMISSION_CAMERA_TA
 import static com.example.admin.mvp_master.tools.RequestTag.PERMISSION_PICTRUE_TAG;
 import static com.example.admin.mvp_master.tools.RequestTag.USER_AVATAR_CAMERA_TAG;
 import static com.example.admin.mvp_master.tools.RequestTag.USER_AVATAR_PICTRUE_TAG;
-import static com.example.admin.mvp_master.tools.network.ApiService.BASEDoubanUrl;
-import static com.example.admin.mvp_master.tools.network.ApiService.BASE_URL;
 import static com.example.admin.mvp_master.tools.network.ApiService.XiaotingUrl;
 
 public class MainActivity extends BasePermissionActivity implements View.OnClickListener {
@@ -191,6 +182,23 @@ public class MainActivity extends BasePermissionActivity implements View.OnClick
         String chace=catchUtil.getCacheSize();
         btn_main.setText(chace+"");
         showNotification(this,1,"title","来了的一条消息");
+
+        findViewById(R.id.darwLayout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this, TestActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.darwLayout2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this, Test2activity.class);
+                startActivity(intent);
+            }
+        });
+
         Douban();//豆瓣的接口
 
     }
